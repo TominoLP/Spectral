@@ -13,7 +13,7 @@ index 2ee34f92e8a89b90448bbf710fdc0d5d6350e919..b4bc46b88aa34bc07b3bf2575996d45b
  
  dependencies {
 -    implementation(project(":purpur-api")) // Purpur
-+    implementation(project(":tentacles-api")) // Purpur // Tentacles
++    implementation(project(":spectral-api")) // Purpur // Spectral
      // Pufferfish start
      implementation("io.papermc.paper:paper-mojangapi:1.19.2-R0.1-SNAPSHOT") {
          exclude("io.papermc.paper", "paper-api")
@@ -22,7 +22,7 @@ index 2ee34f92e8a89b90448bbf710fdc0d5d6350e919..b4bc46b88aa34bc07b3bf2575996d45b
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
 -            "Implementation-Version" to "git-Purpur-$implementationVersion",// Purpur
-+            "Implementation-Version" to "git-Tentacles-$implementationVersion",// Purpur // Tentacles
++            "Implementation-Version" to "git-Spectral-$implementationVersion",// Purpur // Spectral
              "Implementation-Vendor" to date, // Paper
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
@@ -36,8 +36,8 @@ index fba5dbdb7bcbb55400ef18342c9b54612972a718..d7fddab809b7514d93e7969eb574c5d6
      public Component getVersionMessage(@Nonnull String serverVersion) {
 -        String[] parts = serverVersion.substring("git-Purpur-".length()).split("[-\\s]"); // Purpur
 -        final Component updateMessage = getUpdateStatusMessage("PurpurMC/Purpur", "ver/" + getMinecraftVersion(), parts[0]); // Purpur
-+        String[] parts = serverVersion.substring("git-Tentacles-".length()).split("[-\\s]"); // Purpur // Tentacles
-+        final Component updateMessage = getUpdateStatusMessage("PurpurMC/Tentacles", "ver/" + getMinecraftVersion(), parts[0]); // Purpur // Tentacles
++        String[] parts = serverVersion.substring("git-Spectral-".length()).split("[-\\s]"); // Purpur // Spectral
++        final Component updateMessage = getUpdateStatusMessage("PurpurMC/Spectral", "ver/" + getMinecraftVersion(), parts[0]); // Purpur // Spectral
          final Component history = getHistory();
  
          return history != null ? Component.join(net.kyori.adventure.text.JoinConfiguration.separator(Component.newline()), history, updateMessage) : updateMessage; // Purpur
@@ -45,7 +45,7 @@ index fba5dbdb7bcbb55400ef18342c9b54612972a718..d7fddab809b7514d93e7969eb574c5d6
  
      private static Component getUpdateStatusMessage(@Nonnull String repo, @Nonnull String branch, @Nonnull String versionInfo) {
          //int distance; // Purpur - use field
-+        /* // Tentacles start - disable jenkins/api checking
++        /* // Spectral start - disable jenkins/api checking
          try {
              int jenkinsBuild = Integer.parseInt(versionInfo);
              distance = fetchDistanceFromSiteApi(jenkinsBuild, getMinecraftVersion());
@@ -56,7 +56,7 @@ index fba5dbdb7bcbb55400ef18342c9b54612972a718..d7fddab809b7514d93e7969eb574c5d6
 +        */
 +        versionInfo = versionInfo.replace("\"", "");
 +        distance = fetchDistanceFromGitHub(repo, branch, versionInfo);
-+        // Tentacles end
++        // Spectral end
  
          switch (distance) {
              case -1:
@@ -69,7 +69,7 @@ index f9508a26b2e764e752da3d2c9f43a9d7de19dd27..872e3f9fcf096efc961383fe7a44467c
  
  public final class CraftServer implements Server {
 -    private final String serverName = "Purpur"; // Paper // Purpur
-+    private final String serverName = "Tentacles"; // Paper // Purpur // Tentacles
++    private final String serverName = "Spectral"; // Paper // Purpur // Spectral
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
@@ -82,7 +82,7 @@ index fb87620c742ff7912f5e8ccd2a7930dd605576d9..9c18acf824ea4d364e31cdee94a4bff2
          String result = "Unknown-Version";
  
 -        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/org.purpurmc.purpur/purpur-api/pom.properties"); // Purpur
-+        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/org.purpurmc.tentacles/tentacles-api/pom.properties"); // Purpur // Tentacles
++        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/org.purpurmc.spectral/spectral-api/pom.properties"); // Purpur // Spectral
          Properties properties = new Properties();
  
          if (stream != null) {
@@ -95,7 +95,7 @@ index 5d71e3040df116a94df7efa83e61dc1766cc4a93..3b686a43d648d74327f546bebc174084
      }
  
 -    public static String serverModName = "Purpur";
-+    public static String serverModName = "Tentacles"; // Tentacles
++    public static String serverModName = "Spectral"; // Spectral
      private static void serverModName() {
          serverModName = getString("settings.server-mod-name", serverModName);
      }
