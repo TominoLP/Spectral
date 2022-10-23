@@ -1,0 +1,73 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: TominoLP <erfinder.tom@gmail.com>
+Date: Sun, 23 Oct 2022 11:22:30 +0200
+Subject: [PATCH] make the gui great again
+
+
+diff --git a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
+index c07918aa1ed2469ad7a76a0add60ab648ff7f421..2ffd141980f553fe70a6f91f13125cc12ec23aaf 100644
+--- a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
++++ b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
+@@ -37,8 +37,8 @@ public class MinecraftServerGui extends JComponent {
+ 
+     private static final Font MONOSPACED = new Font("Monospaced", 0, 12);
+     private static final Logger LOGGER = LogUtils.getLogger();
+-    private static final String TITLE = "Minecraft server";
+-    private static final String SHUTDOWN_TITLE = "Minecraft server - shutting down!";
++    private static final String TITLE = "Spectral server";
++    private static final String SHUTDOWN_TITLE = "Spectral server - shutting down!";
+     private final DedicatedServer server;
+     private Thread logAppenderThread;
+     private final Collection<Runnable> finalizers = Lists.newArrayList();
+@@ -51,7 +51,7 @@ public class MinecraftServerGui extends JComponent {
+             ;
+         }
+ 
+-        final JFrame jframe = new JFrame("Minecraft server");
++        final JFrame jframe = new JFrame("Spectral server");
+         final MinecraftServerGui servergui = new MinecraftServerGui(server);
+ 
+         jframe.setDefaultCloseOperation(2);
+@@ -59,7 +59,8 @@ public class MinecraftServerGui extends JComponent {
+         jframe.pack();
+         jframe.setLocationRelativeTo((Component) null);
+         jframe.setVisible(true);
+-        jframe.setName("Minecraft server"); // Paper
++        jframe.setName("Spectral server"); // Paper
++        jframe.setBackground(new java.awt.Color(54, 57, 63)); // Spectral
+ 
+         // Paper start - Add logo as frame image
+         try {
+@@ -71,7 +72,7 @@ public class MinecraftServerGui extends JComponent {
+         jframe.addWindowListener(new WindowAdapter() {
+             public void windowClosing(WindowEvent windowevent) {
+                 if (!servergui.isClosing.getAndSet(true)) {
+-                    jframe.setTitle("Minecraft server - shutting down!");
++                    jframe.setTitle("Spectral Server - shutting down!");
+                     server.halt(true);
+                     servergui.runFinalizers();
+                 }
+@@ -110,6 +111,7 @@ public class MinecraftServerGui extends JComponent {
+         Objects.requireNonNull(guistatscomponent);
+         collection.add(guistatscomponent::close);
+         jpanel.add(guistatscomponent, "North");
++        jpanel.setBackground(new java.awt.Color(54, 57, 63)); // Spectral
+         jpanel.add(this.buildPlayerPanel(), "Center");
+         jpanel.setBorder(new TitledBorder(new EtchedBorder(), "Stats"));
+         return jpanel;
+@@ -130,6 +132,7 @@ public class MinecraftServerGui extends JComponent {
+ 
+         jtextarea.setEditable(false);
+         jtextarea.setFont(MinecraftServerGui.MONOSPACED);
++        // Spectral TODO: add SVG animation
+         JTextField jtextfield = new JTextField();
+ 
+         jtextfield.addActionListener((actionevent) -> {
+@@ -147,6 +150,7 @@ public class MinecraftServerGui extends JComponent {
+         jpanel.add(jscrollpane, "Center");
+         jpanel.add(jtextfield, "South");
+         jpanel.setBorder(new TitledBorder(new EtchedBorder(), "Log and chat"));
++        jpanel.setBackground(new java.awt.Color(77, 81, 89)); // Spectral
+         this.logAppenderThread = new Thread(() -> {
+             String s;
+ 

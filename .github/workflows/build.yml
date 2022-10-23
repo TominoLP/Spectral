@@ -1,6 +1,7 @@
-name: Build Prismarine
+name: Build Spectral
 on:
   push:
+  pull:
   workflow_dispatch:
 
 env:
