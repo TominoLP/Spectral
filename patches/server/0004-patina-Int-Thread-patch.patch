@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: TominoLP <erfinder.tom@gmail.com>
+Date: Sun, 23 Oct 2022 14:08:15 +0200
+Subject: [PATCH] patina Int Thread patch
+
+
+diff --git a/src/main/java/net/minecraft/server/rcon/thread/QueryThreadGs4.java b/src/main/java/net/minecraft/server/rcon/thread/QueryThreadGs4.java
+index 1ef089dbf83de35d875c00efdf468c397be56978..f2176e39d5d85bc26c58914f428c3c5bc21f2a1d 100644
+--- a/src/main/java/net/minecraft/server/rcon/thread/QueryThreadGs4.java
++++ b/src/main/java/net/minecraft/server/rcon/thread/QueryThreadGs4.java
+@@ -349,7 +349,7 @@ public class QueryThreadGs4 extends GenericThread {
+             this.identBytes[2] = bs[5];
+             this.identBytes[3] = bs[6];
+             this.ident = new String(this.identBytes, StandardCharsets.UTF_8);
+-            this.challenge = RandomSource.create().nextInt(16777216);
++            this.challenge = java.util.concurrent.ThreadLocalRandom.current().nextInt(16777216); // Prismarin
+             this.challengeBytes = String.format(Locale.ROOT, "\t%s%d\u0000", this.ident, this.challenge).getBytes(StandardCharsets.UTF_8);
+         }
+ 
