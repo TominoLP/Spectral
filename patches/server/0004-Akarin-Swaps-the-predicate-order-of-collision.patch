@@ -5,10 +5,10 @@ Subject: [PATCH] Akarin Swaps the predicate order of collision
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index bef8f4d080fb6067f87b9df986ac33f7003c2a84..941b0f825e3a64bfff11bb8a9b387c4a601b7823 100644
+index 967647c7dc0a4c2d762e7133fe969106f7d8ecba..964b3a675cad1b846f1dedb45184fcbd51bfde6a 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -1968,36 +1968,33 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -1969,36 +1969,33 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
      public void playerTouch(Player player) {}
  
      public void push(Entity entity) {
